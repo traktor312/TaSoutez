@@ -1,0 +1,7 @@
+div{
+    margin: 5em;
+    background-color: yellow;
+}
+.hidden{
+    display: none;
+}

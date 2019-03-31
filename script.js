@@ -20,6 +20,13 @@ function novyClanek(i) {
     return output;
 }
 
+function nastavPocet() {
+    for (var i = 0; i < clanky.length; i++) {
+        document.getElementById('pocet').innerHTML += '<option value=' + (i + 1) + '>' + (i + 1) + '</option>';
+    }
+}
+nastavPocet();
+
 function razeniNazev() {
     var pole = [];
     var pom = 0;
@@ -56,7 +63,7 @@ function razeniDatum() {
     return pole;
 }
 clanek = razeniDatum();
-document.getElementById('pocet').value = 4;
+document.getElementById('pocet').value = clanky.length;
 
 function vypisClanky() {
     document.getElementById("body").innerHTML = "";

@@ -1,11 +1,5 @@
-// Pamatuje ktere tlacitko ma text skryt a ktere ukazat (0 = ukazat, 1 = schovat)
-var dalsi = [];
 // Indexy clanku po seradeni (na zacatku serazene podle data)
 var clanek = [];
-
-for (var i = 0; i < clanky.length; i++) {
-    dalsi.push(0);
-}
 
 function novyClanek(i) {
     var output = "<div id='div" + i + "'><h1>";
@@ -20,6 +14,7 @@ function novyClanek(i) {
     return output;
 }
 
+// Nastaveni poctu clanku, ze kterych si muze uzivatel vybirat
 function nastavPocet() {
     for (var i = 0; i < clanky.length; i++) {
         document.getElementById('pocet').innerHTML += '<option value=' + (i + 1) + '>' + (i + 1) + '</option>';
@@ -27,6 +22,7 @@ function nastavPocet() {
 }
 nastavPocet();
 
+// Razeni clanku podle nazvu
 function razeniNazev() {
     var pole = [];
     var pom = 0;
@@ -45,6 +41,7 @@ function razeniNazev() {
     return pole;
 }
 
+// Razeni clanku podle data
 function razeniDatum() {
     var pole = [];
     var pom = 0;
@@ -62,9 +59,11 @@ function razeniDatum() {
     }
     return pole;
 }
+// Serazeni po nacteni stranky
 clanek = razeniDatum();
 document.getElementById('pocet').value = clanky.length;
 
+// Smaze clanky a znovu vypise podle zadanych kryterii
 function vypisClanky() {
     document.getElementById("body").innerHTML = "";
     if (document.getElementById('razeni').value == 'vzestupne') {
@@ -78,22 +77,22 @@ function vypisClanky() {
         }
     }
 }
+// Vypis clanku po nacteni stranky
 vypisClanky();
 
 // Tlacitko cist dale
 function dale(i) {
     var id = 'div' + i;
-    if (dalsi[i] == 1) {
+    if (document.getElementById(id).childNodes[2].style.display == 'block') {
         document.getElementById(id).childNodes[2].style.display = 'none';
-        dalsi[i]--;
     }
     else {
         document.getElementById(id).childNodes[2].style.display = 'block';
-        dalsi[i]++;
     }
 }
 //
 
+// Po kliknuti ve vyberu typu serazeni se seradi v poli clanky a pote se clanky vypisou
 document.getElementById('vyber').addEventListener('click', function () {
     document.getElementById('podle').value == 'datum' ? clanek = razeniDatum() : clanek = razeniNazev();
     vypisClanky();
